@@ -1,0 +1,73 @@
+<?php
+//print_r($this->view->dados['erro']);die;
+?>
+<!-- Página renderizada pela class IndexController no camino App/Controller/ -->
+  <section id="fixar"><!-- Início seção home -->
+    <?php
+      // Condição que verifica se a requisição retornoou ou não com sucesso
+      if(!isset($this->view->dados->success) || $this->view->dados->success != 1){
+    ?>
+      <!-- Div de alerta de erro -->
+      <div class="row col-12 bg-danger text-white justify-content-center pt-2 pb-2">
+        <a href="" class="text-white">
+          <i class="fa fa-long-arrow-left" aria-hidden="true"></i>
+          <span>Algo deu errado! Tente novamente mais tarde!</span>
+        </a>
+      </div><!-- Fim div de alerta de erro -->
+    <?php
+      }else{// Caso o retorno foi com sucesso entra aqui
+    ?>
+      <div class="container"><!-- Toda área do conteúdo da página -->
+        <div class="row"><!-- Div que alinha conteúdo -->
+          <div class="col-lg-7 d-flex bg-transparencia"><!-- Início de Textos da seção -->
+            <div class="align-self-center"><!--/Alinhamento do texto-->
+              <h1 class="display-4 col-10 ">Sua vida, é muito importante para nós</h1>
+              <p>
+                Atendendo a mais de 1 milhão de pessoas, a VitalLife é uma clinica que facilita o seu agendamento e por isso estamos atendendo 24h online.
+              </p>
+              <!--/Formulário que faz riquisição via ajax solicitando informações do profissional-->
+              <form class="ml-0 mt-4 mr-0 mb-4 pt-4 pb-4 bg-azul m-auto" action="/profissional" method="post">
+                <!--/Div alinha formulário-->
+                <div class="row input-group input-group-lg justify-content-center">
+                  <div class="row col-3">
+                    <h5 class="row text-white align-items-end m-auto">Consulta de</h5>
+                  </div>
+                  <div class="row col-6"><!--/Div que alinha select do formulário-->
+                    <select name="especialidade_id" class="form-control bg-select" required>
+                      <option>Selecione a especialidade</option>
+                      <?php
+                        // Carrega dados de especialidades vindo da requisição ajax
+                        for ($i = 0; $i < count($this->view->dados->content); $i++) {
+                      ?>  
+                          <option value="<?php echo $this->view->dados->content[$i]->especialidade_id; ?>">
+                            <?php echo $this->view->dados->content[$i]->nome; ?>
+                          </option>
+                      <?php
+                        }// Fim dõ laço que carrega dados de especialidades vindo da requisição ajax
+                      ?>
+                    </select>
+                   </div><!--/Fim div que alinha select do formulário-->
+                    <div class="row col-3 pl-4"><!--/Div alinha botão do formulário-->
+                      <div class="input-group-append">
+                        <button type="submit" class="btn btn-verde pl-4 pr-4">AGENDAR</button>
+                      </div>
+                    </div><!--/Fim div alinha botão do formulário-->
+                </div><!--/Fim div alinha formulário-->
+              </form><!--/Fim do formulário-->
+              <p class="row justify-content-center">
+                <span class="mt-2 mr-4">Agendar com médico</span>
+                <a href="" class="btn btn-outline-dark">
+                  <i class="fa fa-plus-square text-dark" aria-hidden="true"></i>
+                </a>
+              </p>
+            </div><!--/ Fim do alinhamento do texto-->
+          </div><!--/fim textos da seção -->
+          <div class="col-md-5 d-none d-lg-block bg-transparencia"><!--/Imagem do médico desaparece em sm e md-->
+            <img src="../../src/img/site/medico.png" width="120%" height="100%">
+          </div><!--/Fim da imagem do médico-->
+        </div><!-- Fim div que alinha conteúdo -->
+      </div><!-- Fim toda área do conteúdo da página -->
+    <?php
+      }
+    ?>
+  </section><!--/fim seção home -->
